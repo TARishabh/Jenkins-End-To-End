@@ -1,0 +1,27 @@
+pipleline {
+    agent any
+    stages {
+        stage ('Backend') {
+            agent {
+                docker {
+                    image 'maven:3.6.3-jdk-11'
+                    args '-u root'
+                }
+            }
+            steps {
+                sh 'mvn --version'
+            }
+        }
+        stage ('Frontend') {
+            agent {
+                docker {
+                    image 'node:14'
+                    args '-u root'
+                }
+            }
+            steps {
+                sh 'node --version'
+            }
+        }
+    }
+}
