@@ -1,11 +1,16 @@
+// we have to write a basic pipeline script in the Jenkinsfile, which runs 
+// node and then sh --node version
+
 pipeline {
     agent {
-        {docker 'node:16-alpine'}
+        docker {
+            image 'node:14'
+            args '-u root'
+        }
     }
-
     stages {
-        stage('Test'){
-            steps{
+        stage('Build') {
+            steps {
                 sh 'node --version'
             }
         }
